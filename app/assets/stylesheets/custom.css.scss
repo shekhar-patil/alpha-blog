@@ -3,7 +3,42 @@
 
 // logo
 
-#logo{
+#logo {
   color: rgb(71, 113, 230);
   font-weight: bold;
+}
+
+.center {
+  text-align: center;
+}
+
+.jumbotron {
+  background-image: asset-url("path.jpg");
+  height: 550px;
+}
+
+.jumbotron h1 {
+  color: white;
+}
+
+footer {
+  margin-top: 45px;
+  padding-top: 45px;
+  margin-bottom: 45px;
+  border-top: solid;
+  color: green;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
 }
