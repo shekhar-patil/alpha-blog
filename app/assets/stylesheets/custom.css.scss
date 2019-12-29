@@ -21,6 +21,17 @@
   color: white;
 }
 
+.description {
+  padding: 5px;
+  margin-top: 5px;
+  border-top: solid 1px;
+}
+
+.article-actions {
+  border-top: 1px solid;
+  padding-top: 5px;
+}
+
 footer {
   margin-top: 45px;
   padding-top: 45px;
@@ -41,4 +52,8 @@ footer ul {
 footer ul li {
   float: left;
   margin-left: 15px;
+}
+
+.center {
+  align-self: center;
 }
