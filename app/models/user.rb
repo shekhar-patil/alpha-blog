@@ -8,4 +8,5 @@ class User < ApplicationRecord
             length: { maximum: 150 }, format: { with: VALID_EMAIL_REGEX }
 
   before_save { self.email = email.downcase }
+  has_secure_password
 end
