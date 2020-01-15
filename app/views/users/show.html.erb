@@ -1,0 +1,8 @@
+<h1 align="center">Welcome to <%= @user.username %>'s page</h1>
+<div class="row">
+  <div class="col-md4 col-md-offset 4 center">
+    <%= gravatar_for(@user, size: 150) %>
+  </div>
+</div>
+
+<%= render '/articles/article', articles: @articles %>

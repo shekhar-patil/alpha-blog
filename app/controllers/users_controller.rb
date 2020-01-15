@@ -14,6 +14,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @articles = Article.where(user_id: params[:id])
+  end
+
   def edit
   end
 
