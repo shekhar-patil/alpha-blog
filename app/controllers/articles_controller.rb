@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: %i[show edit update destroy]
+  before_action :require_user, expect: %i[index show]
+  before_action :require_same_user, only: %i[edit update destroy]
 
   def index
     @articles = Article.paginate(page: params[:page], per_page: 5)
@@ -17,7 +19,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    @article.user = User.first
+    @article.user = current_user
     if @article.save
       flash[:success] = 'Article was successfully created.'
       redirect_to article_url(@article)
@@ -36,21 +38,24 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    if @article.destroy
-      flash[:danger] = 'Article deleted.'
-      redirect_to articles_path
-    else
-      flash[:danger] = 'Error while deleting the article.'
-      redirect_to articles_path
-    end
+    flash[:danger] = @article.destroy ? 'Article deleted.' : 'Error while deleting the article.'
+    redirect_to articles_path
   end
 
   private
-    def set_article
-      @article = Article.find(params[:id])
-    end
 
-    def article_params
-      params.require(:article).permit(:title, :description)
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
+  def article_params
+    params.require(:article).permit(:title, :description)
+  end
+
+  def require_same_user
+    if current_user != @article.user
+      flash[:danger] = 'You can only delete edit your articles.'
+      redirect_to articles_path
     end
+  end
 end
